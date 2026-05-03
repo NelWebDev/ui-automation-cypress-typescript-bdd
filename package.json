@@ -5,10 +5,13 @@
   "private": true,
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "cypress run --browser chrome",
-    "test:headed": "cypress run --headed --browser chrome",
-    "test:chrome": "cypress run --browser chrome",
-    "test:report": "cypress run --reporter mocha-junit-reporter --reporter-options mochaFile=results/junit/results.xml",
+    "test": "cypress run --browser chrome --env tags=\"not @slow and not @extended\"",
+    "test:all": "cypress run --browser chrome",
+    "test:extended": "cypress run --browser chrome --env tags=\"@extended\"",
+    "test:slow": "cypress run --browser chrome --env tags=\"@slow\"",
+    "test:headed": "cypress run --headed --browser chrome --env tags=\"not @slow and not @extended\"",
+    "test:chrome": "cypress run --browser chrome --env tags=\"not @slow and not @extended\"",
+    "test:report": "cypress run --browser chrome --env tags=\"not @slow and not @extended\" --reporter mocha-junit-reporter --reporter-options mochaFile=results/junit/results.xml",
     "validate": "npm run typecheck && npm run test"
   },
   "devDependencies": {
