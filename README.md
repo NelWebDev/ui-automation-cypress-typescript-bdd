@@ -19,6 +19,7 @@ cypress/
     step_definitions/   Cucumber step definitions
   pages/                Page Object classes
   support/              Cypress support files and custom commands
+BUGS.md                 Known bug registry linked to tagged scenarios
 cypress.config.js       Cypress and Cucumber preprocessor configuration
 tsconfig.json           TypeScript configuration
 ```
@@ -41,6 +42,12 @@ Run the suite in headless Chrome:
 
 ```bash
 npm run test
+```
+
+Run known bug scenarios only:
+
+```bash
+npm run test:bugs
 ```
 
 Run the suite in headed Chrome:
@@ -80,20 +87,30 @@ Current coverage includes:
 
 - Successful login with valid Sauce Demo credentials
 - Validation of the inventory page after login
+- Invalid login attempts and locked-out user validation
+- Checkout flow for the first product
+- Cart badge updates when a product is added and removed from the inventory page
+- Known cart checkout bug coverage tagged with `@bug`
 
 Recommended next scenarios:
 
-- Login with invalid credentials
-- Login with a locked-out user
 - Required field validation
 - Logout flow
+- Multiple-product cart updates
+- Checkout form validation
 
 ## Configuration
 
 - Base URL: `https://www.saucedemo.com`
 - Spec pattern: `cypress/e2e/features/**/*.feature`
 - Step definitions: `cypress/e2e/step_definitions/**/*.ts`
+- Default test scripts exclude scenarios tagged with `@slow`, `@extended`, and `@bug`
 - Videos are disabled by default
+
+## Known Bugs
+
+Known application bugs are documented in `BUGS.md` and linked to scenarios tagged with `@bug`.
+These scenarios are excluded from the default suite so they do not block regular validation, but they can be run with `npm run test:bugs`.
 
 ## Notes
 
