@@ -9,6 +9,11 @@ class LoginPage {
     cy.visit("/");
   }
 
+  visitInventoryAs(username: string) {
+    cy.visit("/");
+    this.login(username, "secret_sauce");
+  }
+
   login(username: string, password: string) {
     cy.get(this.usernameField).clear().type(username, { delay: 0 });
     cy.get(this.passwordField).clear().type(password, { delay: 0 });

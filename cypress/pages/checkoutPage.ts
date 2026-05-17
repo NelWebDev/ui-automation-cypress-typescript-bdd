@@ -6,6 +6,7 @@ class CheckoutPage {
   private continueButton = '[data-test="continue"]';
   private finishButton = '[data-test="finish"]';
   private completeHeader = ".complete-header";
+  private backHomeButton = '[data-test="back-to-products"]';
 
   fillInformation(firstName: string, lastName: string, postalCode: string) {
     cy.get(this.checkoutTitle).should("contain.text", "Checkout: Your Information");
@@ -23,6 +24,10 @@ class CheckoutPage {
   assertCheckoutComplete() {
     cy.get(this.checkoutTitle).should("contain.text", "Checkout: Complete!");
     cy.get(this.completeHeader).should("contain.text", "Thank you for your order!");
+  }
+
+  backToProducts() {
+    cy.get(this.backHomeButton).click();
   }
 }
 

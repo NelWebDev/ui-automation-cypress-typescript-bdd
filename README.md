@@ -89,6 +89,7 @@ Current coverage includes:
 - Validation of the inventory page after login
 - Invalid login attempts and locked-out user validation
 - Checkout flow for the first product
+- Checkout flow for 2, 3, and 4 products in a single optimized session
 - Cart badge updates when a product is added and removed from the inventory page
 - Known cart checkout bug coverage tagged with `@bug`
 
@@ -96,7 +97,6 @@ Recommended next scenarios:
 
 - Required field validation
 - Logout flow
-- Multiple-product cart updates
 - Checkout form validation
 
 ## Configuration
@@ -106,6 +106,8 @@ Recommended next scenarios:
 - Step definitions: `cypress/e2e/step_definitions/**/*.ts`
 - Default test scripts exclude scenarios tagged with `@slow`, `@extended`, and `@bug`
 - Videos are disabled by default
+- Purchase and cart scenarios use a logged-in setup step so login UI coverage stays isolated in `login.feature`
+- Page load timeout is extended to reduce flakiness from repeated Sauce Demo page loads
 
 ## Known Bugs
 
