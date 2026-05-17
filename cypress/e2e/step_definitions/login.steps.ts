@@ -15,6 +15,11 @@ Given("I open the Sauce Demo login page", () => {
   loginPage.assertOnLoginPage();
 });
 
+Given("I am logged in as username {string}", (username: string) => {
+  loginPage.visitInventoryAs(username);
+  inventoryPage.assertInventoryPage();
+});
+
 When(
   "I log in with username {string} and password {string}",
   (username: string, password: string) => {

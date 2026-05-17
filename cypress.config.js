@@ -8,6 +8,7 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/features/**/*.feature",
     supportFile: "cypress/support/e2e.ts",
     baseUrl: "https://www.saucedemo.com",
+    pageLoadTimeout: 120000,
     blockHosts: ["events.backtrace.io"],
     video: false,
     retries: {

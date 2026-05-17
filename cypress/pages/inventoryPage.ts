@@ -19,7 +19,17 @@ class InventoryPage {
       .find("button")
       .should("contain.text", "Add to cart")
       .click();
-    cy.get(this.cartBadge).should("contain.text", "1");
+    this.assertCartBadgeQuantity(1);
+  }
+
+  addProductsToCart(quantity: number) {
+    cy.get(this.inventoryItem).should("have.length.at.least", quantity);
+
+    for (let index = 0; index < quantity; index++) {
+      cy.get(this.addToCartButton).first().click();
+    }
+
+    this.assertCartBadgeQuantity(quantity);
   }
 
   assertFirstProductRemoveButton() {
@@ -42,8 +52,10 @@ class InventoryPage {
     cy.get(this.inventoryItem).first().find(this.removeButton).click();
   }
 
-  assertCartBadgeQuantity(quantity: string) {
-    cy.get(this.cartBadge).should("be.visible").and("contain.text", quantity);
+  assertCartBadgeQuantity(quantity: number | string) {
+    cy.get(this.cartBadge)
+      .should("be.visible")
+      .and("contain.text", quantity.toString());
   }
 
   assertCartBadgeIsNotVisible() {

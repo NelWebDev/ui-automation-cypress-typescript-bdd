@@ -4,9 +4,13 @@ class CartPage {
   private checkoutButton = '[data-test="checkout"]';
   private removeButton = '[data-test^="remove"]';
 
-  assertCartPage() {
+  assertCartPage(quantity = 1) {
     cy.get(this.cartTitle).should("contain.text", "Your Cart");
-    cy.get(this.cartItem).should("have.length", 1);
+    this.assertCartItemQuantity(quantity);
+  }
+
+  assertCartItemQuantity(quantity: number) {
+    cy.get(this.cartItem).should("have.length", quantity);
   }
 
   removeProduct() {
