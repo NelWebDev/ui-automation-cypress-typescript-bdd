@@ -6,6 +6,7 @@ class InventoryPage {
   private cartLink = ".shopping_cart_link";
   private addToCartButton = '[data-test^="add-to-cart"]';
   private removeButton = '[data-test^="remove"]';
+  private productName = ".inventory_item_name";
 
   assertInventoryPage() {
     cy.get(this.inventoryTitle).should("contain.text", "Products");
@@ -50,6 +51,10 @@ class InventoryPage {
 
   removeFirstProductFromInventory() {
     cy.get(this.inventoryItem).first().find(this.removeButton).click();
+  }
+
+  openProductDetails(productName: string) {
+    cy.contains(this.productName, productName).should("be.visible").click();
   }
 
   assertCartBadgeQuantity(quantity: number | string) {

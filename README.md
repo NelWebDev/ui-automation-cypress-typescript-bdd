@@ -62,6 +62,12 @@ Run the suite and generate a JUnit report:
 npm run test:report
 ```
 
+Run the product details scenarios only:
+
+```bash
+npx cypress run --browser chrome --spec cypress/e2e/features/product_details.feature
+```
+
 Run all local validation checks:
 
 ```bash
@@ -91,6 +97,8 @@ Current coverage includes:
 - Checkout flow for the first product
 - Checkout flow for 2, 3, and 4 products in a single optimized session
 - Cart badge updates when a product is added and removed from the inventory page
+- Product details validation for each Sauce Demo inventory product
+- Add-to-cart flow from each product details page
 - Known cart checkout bug coverage tagged with `@bug`
 
 Recommended next scenarios:
