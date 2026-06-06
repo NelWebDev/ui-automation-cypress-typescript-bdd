@@ -1,6 +1,7 @@
 class CartPage {
   private cartTitle = ".title";
   private cartItem = ".cart_item";
+  private cartItemName = ".inventory_item_name";
   private checkoutButton = '[data-test="checkout"]';
   private removeButton = '[data-test^="remove"]';
 
@@ -11,6 +12,10 @@ class CartPage {
 
   assertCartItemQuantity(quantity: number) {
     cy.get(this.cartItem).should("have.length", quantity);
+  }
+
+  assertProductIsInCart(productName: string) {
+    cy.contains(this.cartItemName, productName).should("be.visible");
   }
 
   removeProduct() {
