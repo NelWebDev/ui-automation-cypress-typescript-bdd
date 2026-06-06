@@ -5,7 +5,7 @@ class ProductDetailsPage {
   private addToCartButton = '[data-test^="add-to-cart"]';
   private removeButton = '[data-test^="remove"]';
   private cartBadge = ".shopping_cart_badge";
-  private cartLink = ".shopping_cart_link";
+  private backToProductsButton = '[data-test="back-to-products"]';
 
   assertProductDetails(productName: string) {
     cy.get(this.productName).should("be.visible").and("contain.text", productName);
@@ -27,8 +27,8 @@ class ProductDetailsPage {
       .and("contain.text", quantity.toString());
   }
 
-  openCart() {
-    cy.get(this.cartLink).click();
+  backToProducts() {
+    cy.get(this.backToProductsButton).click();
   }
 }
 
