@@ -68,6 +68,12 @@ Run the product details scenarios only:
 npx cypress run --browser chrome --spec cypress/e2e/features/product_details.feature
 ```
 
+Run the checkout validation scenarios only:
+
+```bash
+npx cypress run --browser chrome --spec cypress/e2e/features/checkout_validation.feature
+```
+
 Run all local validation checks:
 
 ```bash
@@ -96,16 +102,20 @@ Current coverage includes:
 - Invalid login attempts and locked-out user validation
 - Checkout flow for the first product
 - Checkout flow for 2, 3, and 4 products in a single optimized session
+- Required checkout information validation
+- Checkout information cancellation back to the cart
 - Cart badge updates when a product is added and removed from the inventory page
+- Inventory sorting by name and price
+- Logout from the inventory menu
 - Product details validation for each Sauce Demo inventory product
 - Add-to-cart flow from each product details page
 - Known cart checkout bug coverage tagged with `@bug`
 
 Recommended next scenarios:
 
-- Required field validation
-- Logout flow
-- Checkout form validation
+- Cart state persistence across page navigation
+- Checkout overview item and total price validation
+- Additional coverage for `problem_user`, `error_user`, and `visual_user`
 
 ## Configuration
 

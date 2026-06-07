@@ -7,6 +7,11 @@ class InventoryPage {
   private addToCartButton = '[data-test^="add-to-cart"]';
   private removeButton = '[data-test^="remove"]';
   private productName = ".inventory_item_name";
+  private productPrice = ".inventory_item_price";
+  private sortDropdown = ".product_sort_container";
+  private menuButton = "#react-burger-menu-btn";
+  private menu = ".bm-menu";
+  private logoutLink = "#logout_sidebar_link";
 
   assertInventoryPage() {
     cy.get(this.inventoryTitle).should("contain.text", "Products");
@@ -51,6 +56,63 @@ class InventoryPage {
 
   removeFirstProductFromInventory() {
     cy.get(this.inventoryItem).first().find(this.removeButton).click();
+  }
+
+  sortProductsBy(option: string) {
+    cy.get(this.sortDropdown).select(option);
+  }
+
+  assertProductNamesSortedAscending() {
+    cy.get(this.productName).then(($names) => {
+      const productNames = [...$names].map((name) => name.innerText);
+      const sortedNames = [...productNames].sort((left, right) =>
+        left.localeCompare(right),
+      );
+
+      expect(productNames).to.deep.equal(sortedNames);
+    });
+  }
+
+  assertProductNamesSortedDescending() {
+    cy.get(this.productName).then(($names) => {
+      const productNames = [...$names].map((name) => name.innerText);
+      const sortedNames = [...productNames].sort((left, right) =>
+        right.localeCompare(left),
+      );
+
+      expect(productNames).to.deep.equal(sortedNames);
+    });
+  }
+
+  assertProductPricesSortedAscending() {
+    cy.get(this.productPrice).then(($prices) => {
+      const productPrices = [...$prices].map((price) =>
+        Number(price.innerText.replace("$", "")),
+      );
+      const sortedPrices = [...productPrices].sort((left, right) => left - right);
+
+      expect(productPrices).to.deep.equal(sortedPrices);
+    });
+  }
+
+  assertProductPricesSortedDescending() {
+    cy.get(this.productPrice).then(($prices) => {
+      const productPrices = [...$prices].map((price) =>
+        Number(price.innerText.replace("$", "")),
+      );
+      const sortedPrices = [...productPrices].sort((left, right) => right - left);
+
+      expect(productPrices).to.deep.equal(sortedPrices);
+    });
+  }
+
+  openMenu() {
+    cy.get(this.menuButton).click();
+    cy.get(this.menu).should("be.visible");
+  }
+
+  logout() {
+    cy.get(this.logoutLink).click();
   }
 
   openProductDetails(productName: string) {
