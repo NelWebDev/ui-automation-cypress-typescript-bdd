@@ -38,6 +38,12 @@ class InventoryPage {
     this.assertCartBadgeQuantity(quantity);
   }
 
+  addProductToCart(productName: string) {
+    cy.contains(this.inventoryItem, productName)
+      .find(this.addToCartButton)
+      .click();
+  }
+
   assertFirstProductRemoveButton() {
     cy.get(this.inventoryItem)
       .first()

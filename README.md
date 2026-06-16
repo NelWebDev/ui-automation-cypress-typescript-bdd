@@ -104,6 +104,7 @@ Current coverage includes:
 - Checkout flow for 2, 3, and 4 products in a single optimized session
 - Required checkout information validation
 - Checkout information cancellation back to the cart
+- Checkout overview product and total price validation
 - Cart badge updates when a product is added and removed from the inventory page
 - Inventory sorting by name and price
 - Logout from the inventory menu
@@ -114,7 +115,6 @@ Current coverage includes:
 Recommended next scenarios:
 
 - Cart state persistence across page navigation
-- Checkout overview item and total price validation
 - Additional coverage for `problem_user`, `error_user`, and `visual_user`
 
 ## Configuration
