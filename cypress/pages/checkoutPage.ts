@@ -1,5 +1,8 @@
 class CheckoutPage {
   private checkoutTitle = ".title";
+  private cartItem = ".cart_item";
+  private cartItemName = ".inventory_item_name";
+  private cartItemPrice = ".inventory_item_price";
   private firstNameField = '[data-test="firstName"]';
   private lastNameField = '[data-test="lastName"]';
   private postalCodeField = '[data-test="postalCode"]';
@@ -9,6 +12,9 @@ class CheckoutPage {
   private completeHeader = ".complete-header";
   private backHomeButton = '[data-test="back-to-products"]';
   private errorMessage = '[data-test="error"]';
+  private subtotal = ".summary_subtotal_label";
+  private tax = ".summary_tax_label";
+  private total = ".summary_total_label";
 
   fillInformation(firstName: string, lastName: string, postalCode: string) {
     cy.get(this.checkoutTitle).should("contain.text", "Checkout: Your Information");
@@ -50,6 +56,28 @@ class CheckoutPage {
   finishCheckout() {
     cy.get(this.checkoutTitle).should("contain.text", "Checkout: Overview");
     cy.get(this.finishButton).click();
+  }
+
+  assertOrderSummaryProducts(products: { product: string; price: string }[]) {
+    cy.get(this.checkoutTitle).should("contain.text", "Checkout: Overview");
+    cy.get(this.cartItem).should("have.length", products.length);
+
+    products.forEach(({ product, price }) => {
+      cy.contains(this.cartItem, product).within(() => {
+        cy.get(this.cartItemName).should("contain.text", product);
+        cy.get(this.cartItemPrice).should("contain.text", price);
+      });
+    });
+  }
+
+  assertOrderTotals(expectedTotals: {
+    subtotal: string;
+    tax: string;
+    total: string;
+  }) {
+    cy.get(this.subtotal).should("contain.text", expectedTotals.subtotal);
+    cy.get(this.tax).should("contain.text", expectedTotals.tax);
+    cy.get(this.total).should("contain.text", expectedTotals.total);
   }
 
   assertCheckoutComplete() {
