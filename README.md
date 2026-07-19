@@ -26,7 +26,7 @@ tsconfig.json           TypeScript configuration
 
 ## Prerequisites
 
-- Node.js 18 or later
+- Node.js 22 or later
 - npm
 - Google Chrome
 
